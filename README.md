@@ -98,7 +98,7 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos. Comente el
   resultado obtenido y discuta si el modelado mediante GMM permite diferenciar las señales de uno y otro.
   
-  <img src="img/gmmmfcc.png" width="640" align="center">
+  <img src="img/gmmmfcc2.png" width="640" align="center">
   
      <p>
         Para implementar el sistema que se adapte mejor a las señales, hemos calculado los MFCC de forma que se reduce considerablemente el conjunto de datos de salida. Esta salida se representa a partir de sus direcciones de máxima varianza  Cuando hemos obtenido todas las características, se procede a hacer la parametrización que se hace a partir de un conjunto de gaussianas. A partir de la relación entre la parametrización y los datos podemos diferenciar las señales de cada uno de los locutores. En función de la probabilidad por la que decidir, el modelo más parecido.
