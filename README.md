@@ -46,15 +46,15 @@ sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
 EXEC="wav2lpcc 13 10 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    - Hemos decidido por prueva i error consiguiendo un aceptable error_rate un orden de lpc de 13 i el número de
+   <p>Hemos decidido por prueva i error consiguiendo un aceptable error_rate un orden de lpc de 13 i el número de
     cepstrums = 10.
-    Por otro lado, para el cálculo de los coeficientes MFCC:
+    Por otro lado, para el cálculo de los coeficientes MFCC:</p>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
 EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    -En este caso usamos un orden de mfcc de 13 por ser de forma generalizada óptimo y 14 coefs. También por 
+   <p> -En este caso usamos un orden de mfcc de 13 por ser de forma generalizada óptimo y 14 coefs. También por 
     prueba y error, obtenemos un error_rate de 11%. Bastante buen resultado.
-
+  </p>
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
   
@@ -65,12 +65,12 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
   <img src="img/plotmfcc.png" width="640" align="center">
   
   + ¿Cuál de ellas le parece que contiene más información?
-  -De entre las 3 opciones, observamos que los coeficientes mel-cepstrum és la representación que muestra más información.
+  <p><br>De entre las 3 opciones, observamos que los coeficientes mel-cepstrum és la representación que muestra más información.
   Esto es así porqué el cepstrum concentra la información del trozo de señal analizado en un numero reducido de muestras y   
   tiene coeficientes más incorrelados que en los demas casos. Esto hará que en el momento de clasificación habrá menos 
   redundancia. 
   También cal mencionar que al calcular los coeficientes Mel, se da importancia a unas determinadas frecuencias que tienen 
-  más importancia a nivel de percepción del sistema auditivo humano.
+  más importancia a nivel de percepción del sistema auditivo humano.</p>
     
   
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
