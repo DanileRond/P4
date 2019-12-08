@@ -63,9 +63,11 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
   para una señal de prueba.
   
   *La imagen siguiente es un ejemplo de cómo insertar imágenes en markdown*
-  
+  <h5>LPC</h5>
   <img src="img/plotlpc.png" width="640" align="center">
+  <h5>LPCC</h5>
   <img src="img/plotlpcc.png" width="640" align="center">
+  <h5>MFCC</h5>
   <img src="img/plotmfcc.png" width="640" align="center">
   
   + ¿Cuál de ellas le parece que contiene más información?
@@ -90,14 +92,27 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
+  <img src="img/gmmmfcc.png" width="640" align="center">
+  
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos. Comente el
   resultado obtenido y discuta si el modelado mediante GMM permite diferenciar las señales de uno y otro.
+  
+  <img src="img/plotmfcc2.png" width="640" align="center">
+  
+     <p>
+        Para implementar el sistema que se adapte mejor a las señales, hemos calculado los MFCC de forma que se reduce considerablemente el conjunto de datos de salida. Esta salida se representa a partir de sus direcciones de máxima varianza  Cuando hemos obtenido todas las características, se procede a hacer la parametrización que se hace a partir de un conjunto de gaussianas. A partir de la relación entre la parametrización y los datos podemos diferenciar las señales de cada uno de los locutores. En función de la probabilidad por la que decidir, el modelo más parecido.
+     </p>
 
 ### Reconocimiento del locutor.
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+  
+   |                 | LP   | LPCC | MFCC |
+  |------------------|:----:|:----:|:----:|
+  | ERROR_RATE      |15.92% |  | 11.72% |
+  
 
 ### Verificación del locutor.
 
@@ -105,6 +120,13 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
+  
+   |                 | LP   | LPCC | MFCC |
+   |------------------|:----:|:----:|:----:|
+   | COSTDETECT       |95% |  | 90.8% |
+   |------------------|:----:|:----:|:----:|
+    | MISSED       |238/250 |  | 227/250 |
+  
  
 ### Test final y trabajo de ampliación.
 
