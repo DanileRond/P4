@@ -19,7 +19,7 @@ def read_gmm(fileGMM):
     try:
         with open(fileGMM, 'rb') as fpGmm:
             headIn = fpGmm.read(15)
-
+    
             if headIn != header:
                 print(f'ERROR: {fileGMM} is not a valid GMM file')
                 exit(-1)
@@ -189,3 +189,4 @@ if __name__ == '__main__':
         limits = None
 
     plotGMM(fileGMM, xDim, yDim, percents, colorGmm, filesFeat, colorFeat, limits, 111)
+

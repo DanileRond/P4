@@ -33,7 +33,7 @@ int _kbhit() {
   current.c_lflag &= ~ICANON;
   tcsetattr(0, TCSANOW, &current);
 
-
+ unsigned int a = 5;
   struct timeval tv;
   fd_set read_fd;
 
