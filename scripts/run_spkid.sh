@@ -82,7 +82,7 @@ fi
 compute_lp() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lp 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lp 16 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -92,7 +92,7 @@ compute_lp() {
 compute_lpcc() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lpcc 13 10 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lpcc 19 16 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
       
         echo $EXEC && $EXEC || exit 1
     done
@@ -101,7 +101,7 @@ compute_lpcc() {
 compute_mfcc() {
     for filename in $(cat $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2mfcc 13 19 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         
         echo $EXEC && $EXEC || exit 1
     done
@@ -165,7 +165,7 @@ for cmd in $*; do
 
       
 	 # \DONE
-	gmm_train  -v 1 -T 0.01 -N5 -m 7 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/world.gmm $lists/verif/users_and_others.train || exit 1
+	gmm_train  -v 1 -T 0.001 -N5 -m 12 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/world.gmm $lists/verif/users_and_others.train || exit 1
 	# gmm_train  -v 1 -t 0.01 -n15 -m 32 -d $w/mcp -e mcp -g $w/gmm/mcp/world.gmm $w/lists_verif/users_and_others.train || exit 1
       # gmm_train -d $w/mfcc -e mfcc -g $w/gmm/mfcc/world.gmm -m 9 -N 20 -T 0.01 -i 0 -n 20 || exit 1
    elif [[ $cmd == verify ]]; then

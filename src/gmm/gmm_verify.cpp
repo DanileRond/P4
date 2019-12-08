@@ -46,10 +46,12 @@ float verify(const GMM &gmm_candidate, const GMM & gmm_world, const fmatrix &dat
   lprobcand = 0.0F;
   lprobbackground = 0.0F;
 
-
-	lprobcand=gmm_candidate.logprob(dat);
-	lprobbackground=gmm_world.logprob(dat);
-	score = lprobcand - lprobbackground; //restats xq log
+	lprobcand = gmm_candidate.logprob(dat);
+  	lprobbackground = gmm_world.logprob(dat);
+  	score = lprobcand - lprobbackground;
+//	lprobcand=gmm_candidate.logprob(dat);
+//	lprobbackground=gmm_world.logprob(dat);
+//	score = lprobcand - lprobbackground; //restats xq log
 
   return score;
 }
