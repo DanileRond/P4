@@ -111,7 +111,7 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
   
    |                 | LP   | LPCC | MFCC |
   |------------------|:----:|:----:|:----:|
-  | ERROR_RATE      |15.92% |  | 11.72% |
+  | ERROR_RATE      |15.92%|82.29|11.72%|
   
 
 ### Verificación del locutor.
