@@ -112,7 +112,7 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
    |                 | LP   | LPCC | MFCC |
   |------------------|:----:|:----:|:----:|
   | ERROR_RATE      |9.94%|4.97%|10.32%|
-  
+
 
 ### Verificación del locutor.
 
@@ -125,8 +125,7 @@ EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
    |------------------|:----:|:----:|:----:|
    | COSTDETECT       |90.8% |74.7  | 90.8% |
     | MISSED       |227/250 | 162/250 | 227/250 |
-  
- 
+
 ### Test final y trabajo de ampliación.
 
 - Recuerde adjuntar los ficheros `class_test.log` y `verif_test.log` correspondientes a la evaluación
