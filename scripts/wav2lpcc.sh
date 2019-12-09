@@ -45,7 +45,7 @@ fi
 sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $WINDOW -l 200 | $LPC -l 200 -m $lpc_order | $LPC2C -m $lpc_order -M $nceps > $base.cep
 
 # Our array files need a header with the number of cols and rows:
-ncol=$((lpc_order+1)) # lpc p =>  (gain a1 a2 ... ap) 
+ncol=$((nceps+1)) # lpc p =>  (gain a1 a2 ... ap) 
 nrow=`$X2X +fa < $base.cep | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
 
 # Build fmatrix file by placing nrow and ncol in front, and the data after them
