@@ -44,19 +44,19 @@ sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Indique qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
-EXEC="wav2lpcc 13 10 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+EXEC="wav2lpcc 19 16 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
    
-   <p>Hemos decidido por prueva i error consiguiendo un aceptable error_rate un orden de lpc de 13 i el número de
-    cepstrums = 10.
+   <p>Hemos decidido por prueva i error consiguiendo un aceptable error_rate un orden de lpc de 19 i el número de
+    cepstrums = 16.
     Por otro lado, para el cálculo de los coeficientes</p> MFCC:
     
     
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
-EXEC="wav2mfcc 13 14 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+EXEC="wav2mfcc 13 19 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   <p> -En este caso usamos un orden de mfcc de 13 por ser de forma generalizada óptimo y 14 coefs. También por 
+   <p> -En este caso usamos un orden de mfcc de 13 por ser de forma generalizada óptimo y 19 coefs. También por 
     prueba y error, obtenemos un error_rate de 11%. Bastante buen resultado.
   </p>
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
