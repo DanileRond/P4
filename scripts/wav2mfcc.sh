@@ -44,7 +44,7 @@ else
 fi
 
 # Main command for feature extration
-sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 200 -m $mfcc_order -s 8000 -n $ncoef > $base.mfcc
+sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 200 -m $mfcc_order -s 8 -n $ncoef > $base.mfcc
 
 # Our array files need a header with the number of cols and rows:
 ncol=$((mfcc_order)) # lpc p =>  (gain a1 a2 ... ap) 

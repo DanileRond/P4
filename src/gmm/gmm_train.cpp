@@ -57,11 +57,13 @@ int main(int argc, const char *argv[]) {
   /// initicialization accordingly.
   switch (init_method) {
   case 0:
-		gmm.random_init(data, nmix);
+		gmm.vq_lbg(data, nmix, em_iterations, em_threshold, verbose);
     break;
   case 1:
+
     break;
   case 2:
+
     break;
   default:
     ;
