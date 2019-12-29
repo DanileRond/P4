@@ -42,7 +42,7 @@ sub read_data {
 	}
 	
 	$user = "";
-	if ($filename !~ /.*SA(...)/) {
+	if ($filename !~ /.*v(...)/) {
 	    print STDERR "Format error in fname ($filename), line $_\n";
 	    exit 1;
 	}

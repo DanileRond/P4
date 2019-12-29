@@ -16,7 +16,7 @@ lists=lists
 w=work
 name_exp=one
 db=spk_ima/speecon
-db_final=spk_ima/sr_test
+
 # ------------------------
 # Usage
 # ------------------------
@@ -142,7 +142,7 @@ for cmd in $*; do
    elif [[ $cmd == test ]]; then
        find $w/gmm/$FEAT -name '*.gmm' -printf '%P\n' | perl -pe 's/.gmm$//' | sort  > $lists/gmm.list
        (gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/class/all.test | tee $w/class_${FEAT}_${name_exp}.log) || exit 1
- #      echo gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/class/all.test
+       echo gmm_classify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/class/all.test
 
    elif [[ $cmd == classerr ]]; then
        if [[ ! -s $w/class_${FEAT}_${name_exp}.log ]] ; then
@@ -197,26 +197,25 @@ for cmd in $*; do
 	   # Perform the final test on the speaker classification of the files in spk_ima/sr_test/spk_cls.
 	   # The list of users is the same as for the classification task. The list of files to be
 	   # recognized is lists/final/class.test
-     #   for filename in $(cat $lists/final/class.test); do
-      #  mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
-     #   EXEC="wav2lpcc 19 26 $db_final/$filename.wav $w/$FEAT/final/$filename.$FEAT"
-      #  echo $EXEC && $EXEC || exit 1
-     #   done        
+#	for filename in $(cat $lists/final/class.test); do
+#        mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
+#        EXEC="wav2lpcc 19 26 spk_ima/sr_test/$filename.wav $w/$FEAT/final/$filename.$FEAT"
+#        echo $EXEC && $EXEC || exit 1
+#        done        
 
-     #  find $w/gmm/$FEAT -name '*.gmm' -printf '%P\n' | perl -pe 's/.gmm$//' | sort  > $lists/gmm.list
-     #  (gmm_classify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/final/class.test | tee $w/final/class_test.log) || exit 1
-
-       if [[ ! -s $w/final/class_test.log ]] ; then
+       find $w/gmm/$FEAT -name '*.gmm' -printf '%P\n' | perl -pe 's/.gmm$//' | sort  > $lists/gmm.list
+       (gmm_classify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm $lists/gmm.list  $lists/final/class.test | tee $w/final/class_test.log) || exit 1
+	 if [[ ! -s $w/final/class_test.log ]] ; then
           echo "ERROR: $w/final/class_test.log not created"
           exit 1
-       fi
+         fi
        # Count errors
-       perl -ne 'BEGIN {$ok=0; $err=0}
-                 next unless (/^.*c(...).*SES(...).*$/); 
-                 if ($1 == $2) {$ok++}
+     perl -ne 'BEGIN {$ok=0; $err=0}
+ 		next unless /^.*SA(...).*SES(...).*$/;
+                 if ($F[1] == $F[2]) {$ok++}
                  else {$err++}
                  END {printf "nerr=%d\tntot=%d\terror_rate=%.2f%%\n", ($err, $ok+$err, 100*$err/($ok+$err))}' $w/final/class_test.log | tee -a $w/final/class_test.log
-       
+      
    elif [[ $cmd == finalverif ]]; then
        ## @file
 	   # \TODO
@@ -226,18 +225,20 @@ for cmd in $*; do
 	   # lists/final/verif.test.candidates
        echo "implement finalverif ..."
 #	for filename in $(cat $lists/final/verif.test); do
-  #      mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
-  #     EXEC="wav2lpcc 19 26 spk_ima/sr_test/$filename.wav $w/$FEAT/final/$filename.$FEAT"
-  #      echo $EXEC && $EXEC || exit 1
- #       done 
+ #       mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
+  #      EXEC="wav2lpcc 19 26 spk_ima/sr_test/$filename.wav $w/$FEAT/final/$filename.$FEAT"
+ #       echo $EXEC && $EXEC || exit 1
+#        done 
 
-#       gmm_verify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm -w world lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates | tee $w/final/verif_test.log || exit 1
-
+       gmm_verify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm -w $world lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates | tee $w/final/verif_test.log
+       
        if [[ ! -s $w/final/verif_test.log ]] ; then
           echo "ERROR: $w/final/verif_test.log not created"
           exit 1
        fi
-	spk_verif_score $w/final/verif_test.log | tee $w/final/verif_test.res
+       
+       spk_verif_score $w/final/verif_test.log | tee $w/final/verif_test.res
+
    # If the command is not recognize, check if it is the name
    # of a feature and a compute_$FEAT function exists.
    elif [[ "$(type -t compute_$cmd)" = function ]]; then
