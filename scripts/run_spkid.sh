@@ -226,17 +226,22 @@ for cmd in $*; do
 	   # lists/final/verif.test.candidates
        echo "implement finalverif ..."
 #	for filename in $(cat $lists/final/verif.test); do
-  #      mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
-  #     EXEC="wav2lpcc 19 26 spk_ima/sr_test/$filename.wav $w/$FEAT/final/$filename.$FEAT"
+    #    mkdir -p `dirname $w/$FEAT/final/$filename.$FEAT`
+   #    EXEC="wav2lpcc 19 26 spk_ima/sr_test/$filename.wav $w/$FEAT/final/$filename.$FEAT"
   #      echo $EXEC && $EXEC || exit 1
- #       done 
+  #      done 
 
-#       gmm_verify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm -w world lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates | tee $w/final/verif_test.log || exit 1
+ #      gmm_verify -d $w/$FEAT/final -e $FEAT -D $w/gmm/$FEAT -E gmm -w world lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates | tee $w/final/verif_test.log || exit 1
 
        if [[ ! -s $w/final/verif_test.log ]] ; then
           echo "ERROR: $w/final/verif_test.log not created"
           exit 1
        fi
+
+	perl -ane 'print "$F[0]\t$F[1]\t";
+if ($F[2] > -3.214) {print "1\n"}
+else {print "0\n"}' $w/final/verif_test.log > $w/final/verif_test1.log
+
 	spk_verif_score $w/final/verif_test.log | tee $w/final/verif_test.res
    # If the command is not recognize, check if it is the name
    # of a feature and a compute_$FEAT function exists.
