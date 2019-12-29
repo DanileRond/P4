@@ -40,24 +40,24 @@ sox $inputfile -t raw - | $X2X +sf | $FRAME -l 400 -p 80 | $WINDOW -l 400 -L 400
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC), en
   su fichero <code>scripts/wav2mfcc.sh</code>:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
-sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 200 -m $mfcc_order -s 8000 -n $ncoef > $base.mfcc
+sox $inputfile -t raw - dither -p12 | $X2X +sf | $FRAME -l 200 -p 40 | $MFCC -l 200 -m $mfcc_order -s 8 -n $ncoef > $base.mfcc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Indique qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
-EXEC="wav2lpcc 19 16 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+EXEC="wav2lpcc 19 26 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
    
    <p>Hemos decidido por prueva i error consiguiendo un aceptable error_rate un orden de lpc de 19 i el número de
-    cepstrums = 16.
+    cepstrums = 26.
     Por otro lado, para el cálculo de los coeficientes</p> MFCC:
     
     
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.sh
-EXEC="wav2mfcc 13 19 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+EXEC="wav2mfcc 14 19 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   <p> -En este caso usamos un orden de mfcc de 13 por ser de forma generalizada óptimo y 19 coefs. También por 
-    prueba y error, obtenemos un error_rate de 11%. Bastante buen resultado.
+   <p> -En este caso usamos un orden de mfcc de 14 por ser de forma generalizada óptimo y 19 coefs. También por 
+    prueba y error, obtenemos un error_rate de 0.89%. Bastante mejor resultado que el obtenido anteriormente.
   </p>
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para una señal de prueba.
