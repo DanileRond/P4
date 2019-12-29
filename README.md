@@ -133,7 +133,9 @@ EXEC="wav2mfcc 14 19 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
 
 - Recuerde adjuntar los ficheros `class_test.log` y `verif_test.log` correspondientes a la evaluación
   *ciega* final.
-
+	<p>
+		-Ficheros adjuntos en lists/fitxers_entrega
+	</p>
 - Recuerde, también, enviar a Atenea un fichero en formato zip o tgz con la memoria con el trabajo
   realizado como ampliación, así como los ficheros `class_ampl.log` y/o `verif_ampl.log`, obtenidos como
   resultado del mismo.
